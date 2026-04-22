@@ -30,14 +30,14 @@ test.describe('Dashboard Page', () => {
     //test 2
     test('Dashboard page UI Content', async ({ page }) => {
 
-    await test.step('Login to application', async () => {
-        await page.goto(Login_url);
-        await page.getByLabel('Email').fill(email);
-        await page.getByLabel('Password').fill(pass);
-        await page.getByRole('button', { name: 'Sign in' }).click();
-        await expect(page).toHaveURL(/dashboard/);
-    });
-
+    // await test.step('Login to application', async () => {
+    //     await page.goto(Login_url);
+    //     await page.getByLabel('Email').fill(email);
+    //     await page.getByLabel('Password').fill(pass);
+    //     await page.getByRole('button', { name: 'Sign in' }).click();
+    //     await expect(page).toHaveURL(/dashboard/);
+    // });
+   //test
     await test.step('Validate headings', async () => {
         await expect(page.getByRole('heading', {
          name: 'Welcome to the Practice Playground'
@@ -54,7 +54,8 @@ test.describe('Dashboard Page', () => {
     //     await expect(page.getByText('navigation behavior here')).toBeVisible();
     //     await expect(page.getByText('automation flows will be added next')).toBeVisible();
     // });
-
+    
+    
         await test.step('Validate Login Flow card', async () => {
             const loginCard = page.locator('div').filter({
             has: page.getByRole('heading', { name: 'Login Flow' })
@@ -81,7 +82,7 @@ test.describe('Dashboard Page', () => {
 
     }); //end   UI Content
 
-
+  //test 3
     test('Dashboard Navigational buttons', async({page}) => {
        await expect(
             page.getByRole('button', { name: 'Go to Products' })
@@ -92,5 +93,16 @@ test.describe('Dashboard Page', () => {
         ).toBeVisible();
     });// end  Navigational buttons
 
+    //Event trigger
+        test('User can navigate to Products page', async ({ page }) => {
+            await page.getByRole('button', { name: 'Go to Products' }).click();
+
+            await expect(page).toHaveURL(/products/);
+        });
+       test('User can logout successfully', async ({ page }) => {
+            await page.getByRole('button', { name: 'Logout from Playground' }).click();
+
+            await expect(page).toHaveURL(/login/);
+        });
 
 }); //end test.describe
